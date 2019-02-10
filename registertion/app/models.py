@@ -19,6 +19,7 @@ class Register(models.Model):
     phone_number = PhoneNumberField(blank=True, help_text='Contact phone number')
     email = models.EmailField(null=False, blank=True)
     address = models.CharField(null=False, blank=False, max_length=200)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.id)
