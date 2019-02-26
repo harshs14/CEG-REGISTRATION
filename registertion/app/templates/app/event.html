@@ -2,12 +2,11 @@
     {% for event in event_list %}
       <ul class="event_list" style="font-size:10px;">
           <li>
-          <h1>{{ event.name }}</h1>
+              <h1><a href="{% url 'event_detail' event_detail.id %}" style="text-decoration:none;">{{ event.name }}</a></h1>
           </li>
        </ul>
     {% endfor %}
 
 {% else %}
-
     <p>NO EVENTS ARE AVAILABLE</p>
 {% endif %}

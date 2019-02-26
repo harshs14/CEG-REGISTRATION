@@ -7,6 +7,7 @@ class Event(models.Model):
     description = models.CharField(max_length=1000, null=False, blank=True)
     avatar = models.ImageField(upload_to='event_pic')
     video = models.FileField(upload_to='event_video')
+    venue = models.CharField(max_length=100, null=False, blank=True)
     timestamp = models.DateTimeField(default=None, null=True)
     seats = models.IntegerField(null=False, blank=True)
 
