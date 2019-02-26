@@ -2,6 +2,7 @@ from django.views import View
 from .models import *
 from .forms import *
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 
 
 class Events(View):
@@ -19,7 +20,7 @@ class EventDetail(View):
 
     def get(self, request, *args, **kwargs):
 
-        event_obj = Event.objects.get(id=kwargs['pk'])
+        event_obj = Event.objects.get(pk=kwargs['pk'])
         context = {
             'name': event_obj.name,
             'description': event_obj.description,
@@ -28,8 +29,10 @@ class EventDetail(View):
             'video': event_obj.video,
             'time': event_obj.timestamp,
             'seats': event_obj.seats,
-            'id': event_obj.id
-        }
+            'id': event_obj.id,
+          }
+
+
 
         return render(request, self.template_name, context)
 
