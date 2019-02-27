@@ -6,8 +6,7 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = Register
-        fields = ('name', 'phone_number', 'email', 'address', 'event_id', 'event_name')
-        read_only_fields = ('event_id', 'event_name')
+        fields = ('name', 'phone_number', 'email', 'address',)
 
 
 class ContactForm(forms.ModelForm):

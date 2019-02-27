@@ -2,7 +2,8 @@ from django.views import View
 from .models import *
 from .forms import *
 from django.shortcuts import render, redirect
-from django.shortcuts import get_object_or_404
+from registertion.settings import EMAIL_HOST_USER
+from django.template.loader import render_to_string
 
 
 class Events(View):
@@ -52,14 +53,16 @@ class EventRegister(View):
             event_register.event_id = event_obj
             event_register.event_name = event_obj.name
             event_register.save()
+            print(form, "1")
+            print(event_register, "2")
+
+        # message = render_to_string('app/event_register_email.html', {
+        #
+        #
+        # })
+        # from_mail = EMAIL_HOST_USER
+        # to_mail = [user.email]
+        # send_mail(subject, message, from_mail, to_mail, fail_silently=False)
+        # messages.success(request, 'VERIFY YOUR EMAIL.')
 
         return render(request, 'app/registered.html')
-
-
-    
-
-
-
-
-
-
