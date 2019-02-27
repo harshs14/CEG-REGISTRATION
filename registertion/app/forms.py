@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 
-class Register(forms.ModelForm):
+class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = Register
@@ -10,7 +10,7 @@ class Register(forms.ModelForm):
         read_only_fields = ('event_id', 'event_name')
 
 
-class Contact(forms.ModelForm):
+class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Contact

@@ -30,12 +30,33 @@ class EventDetail(View):
             'time': event_obj.timestamp,
             'seats': event_obj.seats,
             'id': event_obj.id,
-          }
-
-
-
+        }
         return render(request, self.template_name, context)
 
+
+class EventRegister(View):
+    template_name = 'app/event_register.html'
+
+    def get(self, request, *args, **kwargs):
+        form = RegisterForm()
+        context = {'form': form}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+
+        event_obj = Event.objects.get(pk=kwargs['pk'])
+
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            event_register = form.save(commit=False)
+            event_register.event_id = event_obj
+            event_register.event_name = event_obj.name
+            event_register.save()
+
+        return render(request, 'app/registered.html')
+
+
+    
 
 
 
