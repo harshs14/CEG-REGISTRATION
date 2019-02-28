@@ -55,11 +55,10 @@ class EventRegister(View):
             event_register.event_name = event_obj.name
             event_register.save()
             print(event_register.email, "2")
-
-            # message = render_to_string('app/event_register_email.html', {
-            #
-            # })
-            message = "YOU ARE REGISTERED"
+            x = event_obj.name
+            r_id = event_register
+            message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ". \n REGISTRATION ID->" + str(r_id)
+            # message = "REGISTERED"
             subject = "CEG EVENT REGISTRATION"
             from_mail = EMAIL_HOST_USER
             to_mail = [event_register.email]
