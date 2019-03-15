@@ -1,3 +1,5 @@
+{% if event %}
+    {% for e in event %}
    <h2>Name:- {{ name }}</h2>
    <br>
 
@@ -12,3 +14,11 @@
 
    <h2>Seats:- {{ seats }}</h2>
    <br>
+
+   <h1><a href="{% url 'register' e_id=e.pk %}" style="text-decoration:none;">REGISTER</a></h1>
+
+    {% endfor %}
+
+{% else %}
+    <p>NO EVENTS ARE AVAILABLE</p>
+{% endif %}

@@ -2,7 +2,8 @@
     {% for event in event_list %}
       <ul class="event_list" style="font-size:10px;">
           <li>
-              <h1><a href="{% url 'detail' event.id %}" style="text-decoration:none;">{{ event.name }}</a></h1>
+          <h1><a href="{% url 'detail' e_id=event.pk %}" style="text-decoration:none;">{{ event.name}}</a></h1>
+              <!--<h1><a href="{% url 'detail' event.id %}" style="text-decoration:none;">{{ event.name }}</a></h1>-->
           </li>
        </ul>
     {% endfor %}

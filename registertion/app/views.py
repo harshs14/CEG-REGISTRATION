@@ -4,7 +4,6 @@ from .forms import *
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from registertion.settings import EMAIL_HOST_USER
-from django.template.loader import render_to_string
 
 
 class Events(View):
@@ -20,9 +19,9 @@ class Events(View):
 class EventDetail(View):
     template_name = 'app/event_detail.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, e_id, *args, **kwargs):
 
-        event_obj = Event.objects.get(pk=kwargs['pk'])
+        event_obj = Event.objects.get(pk=e_id)
         context = {
             'name': event_obj.name,
             'description': event_obj.description,
@@ -39,14 +38,16 @@ class EventDetail(View):
 class EventRegister(View):
     template_name = 'app/event_register.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, e_id, *args, **kwargs):
         form = RegisterForm()
-        context = {'form': form}
+        event_obj = Event.objects.get(pk=e_id)
+
+        context = {'form': form, 'event': event_obj}
         return render(request, self.template_name, context)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, e_id, *args, **kwargs):
 
-        event_obj = Event.objects.get(pk=kwargs['pk'])
+        event_obj = Event.objects.get(pk=e_id)
 
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -58,11 +59,8 @@ class EventRegister(View):
             x = event_obj.name
             r_id = event_register
             message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ". \n REGISTRATION ID->" + str(r_id)
-            # message = "REGISTERED"
             subject = "CEG EVENT REGISTRATION"
             from_mail = EMAIL_HOST_USER
             to_mail = [event_register.email]
             send_mail(subject, message, from_mail, to_mail, fail_silently=False)
-            # messages.success(request, 'VERIFY YOUR EMAIL.')
-
         return render(request, 'app/registered.html')
