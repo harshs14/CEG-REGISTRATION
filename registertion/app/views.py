@@ -23,6 +23,7 @@ class EventDetail(View):
 
         event_obj = Event.objects.get(pk=e_id)
         context = {
+            'event': Event.objects.filter(pk=e_id),
             'name': event_obj.name,
             'description': event_obj.description,
             'venue': event_obj.venue,
@@ -40,7 +41,7 @@ class EventRegister(View):
 
     def get(self, request, e_id, *args, **kwargs):
         form = RegisterForm()
-        event_obj = Event.objects.get(pk=e_id)
+        event_obj = Event.objects.filter(pk=e_id)
 
         context = {'form': form, 'event': event_obj}
         return render(request, self.template_name, context)
