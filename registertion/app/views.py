@@ -59,9 +59,35 @@ class EventRegister(View):
             print(event_register.email, "2")
             x = event_obj.name
             r_id = event_register
-            message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ". \n REGISTRATION ID->" + str(r_id)
+            message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ".\nREGISTRATION ID->" + str(r_id)
             subject = "CEG EVENT REGISTRATION"
             from_mail = EMAIL_HOST_USER
             to_mail = [event_register.email]
             send_mail(subject, message, from_mail, to_mail, fail_silently=False)
         return render(request, 'app/registered.html')
+
+
+class Contact(View):
+
+    def post(self, request):
+        template_name = 'app/contact_us.html'
+
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # event_register = form.save(commit=False)
+            # event_register.event_id = event_obj
+            # event_register.event_name = event_obj.name
+            # event_register.save()
+            # print(event_register.email, "2")
+            # x = event_obj.name
+            # r_id = event_register
+            # message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ".\nREGISTRATION ID->" + str(r_id)
+            # subject = "CEG EVENT REGISTRATION"
+            # from_mail = EMAIL_HOST_USER
+            # to_mail = [event_register.email]
+            # send_mail(subject, message, from_mail, to_mail, fail_silently=False)
+        return render(request, 'app/contact_done.html')
+
+
+
+
