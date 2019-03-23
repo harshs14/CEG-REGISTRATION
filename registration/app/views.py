@@ -74,18 +74,14 @@ class Contact(View):
 
         form = ContactForm(request.POST)
         if form.is_valid():
-            # event_register = form.save(commit=False)
-            # event_register.event_id = event_obj
-            # event_register.event_name = event_obj.name
-            # event_register.save()
-            # print(event_register.email, "2")
-            # x = event_obj.name
-            # r_id = event_register
-            # message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ".\nREGISTRATION ID->" + str(r_id)
-            # subject = "CEG EVENT REGISTRATION"
-            # from_mail = EMAIL_HOST_USER
-            # to_mail = [event_register.email]
-            # send_mail(subject, message, from_mail, to_mail, fail_silently=False)
+            contact = form.save(commit=False)
+            contact.save()
+
+            message = "THANK YOU FOR CONTACTING CEG, YOUR ENQUIRY WILL BE RESOLVED SOON"
+            subject = "CONTACT CEG"
+            from_mail = EMAIL_HOST_USER
+            to_mail = [Contact.email]
+            send_mail(subject, message, from_mail, to_mail, fail_silently=False)
         return render(request, 'app/contact_done.html')
 
 
