@@ -68,9 +68,15 @@ class EventRegister(View):
 
 
 class Contact(View):
+    template_name = 'app/contact_us.html'
+
+    def get(self, request, *args, **kwargs):
+
+        form = ContactForm()
+        context = {'form': form}
+        return render(request, self.template_name, context)
 
     def post(self, request):
-        template_name = 'app/contact_us.html'
 
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -80,7 +86,7 @@ class Contact(View):
             message = "THANK YOU FOR CONTACTING CEG, YOUR ENQUIRY WILL BE RESOLVED SOON"
             subject = "CONTACT CEG"
             from_mail = EMAIL_HOST_USER
-            to_mail = [Contact.email]
+            to_mail = [contact.email]
             send_mail(subject, message, from_mail, to_mail, fail_silently=False)
         return render(request, 'app/contact_done.html')
 
