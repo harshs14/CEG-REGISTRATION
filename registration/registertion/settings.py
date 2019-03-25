@@ -88,9 +88,9 @@ WSGI_APPLICATION = 'registertion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ceg_registertion',
+        'NAME': 'ceg_registration',
         'USER': 'postgres',
-        'PASSWORD': 'postgresql',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '5432',
     }

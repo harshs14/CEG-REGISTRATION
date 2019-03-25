@@ -1,1 +1,0 @@
-web: gunicorn registertion.wsgi --log-file -
