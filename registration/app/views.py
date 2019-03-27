@@ -3,7 +3,7 @@ from .models import *
 from .forms import *
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from registertion.settings import EMAIL_HOST_USER
+from registration.settings import EMAIL_HOST_USER
 
 
 class Events(View):
@@ -27,7 +27,7 @@ class EventDetail(View):
             'name': event_obj.name,
             'description': event_obj.description,
             'venue': event_obj.venue,
-            # 'avatar': event_obj.avatar,
+            'avatar': event_obj.avatar,
             # 'video': event_obj.video,
             'time': event_obj.timestamp,
             'seats': event_obj.seats,
