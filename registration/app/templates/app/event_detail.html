@@ -15,7 +15,9 @@
    <h2>Seats:- {{ seats }}</h2>
    <br>
 
+   {% if avatar %}
    <img src="{{ avatar.url }}">
+   {% endif %}
 
    <h1><a href="{% url 'register' e_id=e.pk %}" style="text-decoration:none;">REGISTER</a></h1>
 
