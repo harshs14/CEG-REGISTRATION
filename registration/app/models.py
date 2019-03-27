@@ -5,7 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Event(models.Model):
     name = models.CharField(max_length=100, null=False, blank=True)
     description = models.CharField(max_length=1000, null=False, blank=True)
-    # avatar = models.ImageField(upload_to='event_pic')
+    avatar = models.ImageField(upload_to='event_pic', null=True, blank=False)
     # video = models.FileField(upload_to='event_video')
     venue = models.CharField(max_length=100, null=False, blank=True)
     timestamp = models.DateTimeField(default=None, null=True)
