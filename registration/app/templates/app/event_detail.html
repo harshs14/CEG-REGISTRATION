@@ -18,6 +18,14 @@
    {% if avatar %}
    <img src="{{ avatar.url }}">
    {% endif %}
+<br><br>
+
+   {% if video %}
+   <video width="320" height="240" controls>
+    <source src="{{ video.url }}" type="video/mp4">
+   </video>
+   {% endif %}
+
 
    <h1><a href="{% url 'register' e_id=e.pk %}" style="text-decoration:none;">REGISTER</a></h1>
 
