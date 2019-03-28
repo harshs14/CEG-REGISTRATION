@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.views import View
 from .models import *
 from .forms import *
@@ -28,7 +29,7 @@ class EventDetail(View):
             'description': event_obj.description,
             'venue': event_obj.venue,
             'avatar': event_obj.avatar,
-            # 'video': event_obj.video,
+            'video': event_obj.video,
             'time': event_obj.timestamp,
             'seats': event_obj.seats,
             'id': event_obj.id,
@@ -42,9 +43,12 @@ class EventRegister(View):
     def get(self, request, e_id, *args, **kwargs):
         form = RegisterForm()
         event_obj = Event.objects.filter(pk=e_id)
-
-        context = {'form': form, 'event': event_obj}
-        return render(request, self.template_name, context)
+        event = Event.objects.get(pk=e_id)
+        if event.seats == 0:
+            return render(request, 'app/seats_full.html')
+        else:
+            context = {'form': form, 'event': event_obj}
+            return render(request, self.template_name, context)
 
     def post(self, request, e_id, *args, **kwargs):
 
@@ -55,6 +59,8 @@ class EventRegister(View):
             event_register = form.save(commit=False)
             event_register.event_id = event_obj
             event_register.event_name = event_obj.name
+            event_obj.seats = event_obj.seats - 1
+            event_obj.save()
             event_register.save()
             print(event_register.email, "2")
             x = event_obj.name
@@ -64,7 +70,8 @@ class EventRegister(View):
             from_mail = EMAIL_HOST_USER
             to_mail = [event_register.email]
             send_mail(subject, message, from_mail, to_mail, fail_silently=False)
-        return render(request, 'app/registered.html')
+            messages.success(request, "SUCCESSFULLY REGISTERED")
+        return redirect('event_list')
 
 
 class Contact(View):
