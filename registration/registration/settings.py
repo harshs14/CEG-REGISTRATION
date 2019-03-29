@@ -166,3 +166,5 @@ STATICFILES_DIRS = [
      '/var/www/static/',
 ]
 MEDIA_URL = '/media/'
+
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LcZyJoUAAAAANaL72cpfn7E6uRYV6wAvsSfuyUy'

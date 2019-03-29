@@ -17,7 +17,7 @@ class Event(models.Model):
 
 class Register(models.Model):
     name = models.CharField(max_length=50, null=False, blank=True)
-    phone_number = PhoneNumberField(blank=True, help_text='Contact phone number')
+    phone_number = PhoneNumberField(blank=True)
     email = models.EmailField(null=False, blank=True)
     address = models.CharField(null=False, blank=False, max_length=200)
     event_id = models.ForeignKey(Event, on_delete=models.CASCADE)
@@ -30,7 +30,7 @@ class Register(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=50, null=False, blank=True)
     email = models.EmailField(null=False, blank=True)
-    phone_number = PhoneNumberField(blank=True, help_text='Contact phone number')
+    phone_number = PhoneNumberField(blank=True)
     enquiry = models.CharField(max_length=500, blank=False, null=True)
 
     def __str__(self):

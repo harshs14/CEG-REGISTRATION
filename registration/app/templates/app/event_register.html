@@ -1,11 +1,18 @@
+<html>
+<head>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
 <form method="post">
 
     {% csrf_token %}
+    {{ form.as_p }}
 
-    <label>{{ form.as_p }}
 
-    </label>
+    <div class="g-recaptcha" data-sitekey="6LcZyJoUAAAAAK_AGiNm_CxiA8RnmYjmDJa-muzd"></div>
     <br>
     <button>REGISTER</button>
 
 </form>
+</body>
+</html>
