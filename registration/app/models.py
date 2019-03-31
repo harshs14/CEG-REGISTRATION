@@ -28,10 +28,10 @@ class Register(models.Model):
 
 
 class Contact(models.Model):
-    name = models.CharField(max_length=50, null=False, blank=True)
-    email = models.EmailField(null=False, blank=True)
-    phone_number = PhoneNumberField(blank=True)
-    enquiry = models.CharField(max_length=500, blank=False, null=True)
+    name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(null=False, blank=False)
+    phone_number = PhoneNumberField(blank=False, null=False)
+    enquiry = models.CharField(max_length=500, blank=False, null=False)
 
     def __str__(self):
         return str(self.id)
