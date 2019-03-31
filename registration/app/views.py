@@ -5,6 +5,10 @@ from .forms import *
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from registration.settings import EMAIL_HOST_USER
+import json
+import urllib
+from django.shortcuts import render, redirect
+from django.conf import settings
 
 
 class Events(View):
@@ -56,6 +60,26 @@ class EventRegister(View):
 
         form = RegisterForm(request.POST)
         if form.is_valid():
+
+            ''' Begin reCAPTCHA validation '''
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req = urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            ''' End reCAPTCHA validation '''
+
+            if result['success']:
+                form.save()
+                messages.success(request, 'successful registration!')
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+
             event_register = form.save(commit=False)
             event_register.event_id = event_obj
             event_register.event_name = event_obj.name
