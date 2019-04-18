@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.views import View
+from .models import *
 from .forms import *
 from django.core.mail import send_mail
+from django.shortcuts import render, redirect
 from registration.settings import EMAIL_HOST_USER
 import json
 import urllib
@@ -88,7 +90,7 @@ class EventRegister(View):
             x = event_obj.name
             r_id = event_register
             message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ".\nREGISTRATION ID->" + str(r_id)
-            subject = "CEG EVENT REGISTRATIOkN"
+            subject = "CEG EVENT REGISTRATION"
             from_mail = EMAIL_HOST_USER
             to_mail = [event_register.email]
             send_mail(subject, message, from_mail, to_mail, fail_silently=False)
@@ -118,11 +120,5 @@ class Contact(View):
             to_mail = [contact.email]
             send_mail(subject, message, from_mail, to_mail, fail_silently=False)
         return render(request, 'app/contact_done.html')
-
-
-# def validate_registration_form(request):
-#     phone_no = request.GET.get("value1", "")
-#     email_id = request.GET.get("value2", "")
-#
 
 
