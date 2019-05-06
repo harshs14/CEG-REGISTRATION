@@ -1,20 +1,51 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+{% block detail %}
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+h2{
+color:white;
+}
+.w3-btn {width:150px;}
+
+th,td{
+   color:black;
+   font-size:2vw;
+}
+
+</style>
+</head>
+<body>
+
 {% if event %}
     {% for e in event %}
-   <h2>Name:- {{ name }}</h2>
-   <br>
+<table style="width:100%" class="w3-table w3-striped">
+  <tr>
+    <th>Name:</th>
+    <td>{{ name }}</td>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td>{{ description }}</td>
+  </tr>
+  <tr>
+    <th>Venue:</th>
+    <td>{{ venue }}</td>
+  </tr>
+  <tr>
+    <th>Time:</th>
+    <td>{{ time }}</td>
+  </tr>
 
-   <h2>Description:- {{ description }}</h2>
-   <br>
-
-   <h2>Venue:- {{ venue }}</h2>
-   <br>
-
-   <h2>Time:- {{ time }}</h2>
-   <br>
-
-   <h2>Seats:- {{ seats }}</h2>
-   <br>
-
+  <tr>
+    <th>Seats:</th>
+    <td>{{ seats }}</td>
+  </tr>
+</table>
    {% if avatar %}
    <img src="{{ avatar.url }}">
    {% endif %}
@@ -26,11 +57,13 @@
    </video>
    {% endif %}
 
-
-   <h1><a href="{% url 'register' e_id=e.pk %}" style="text-decoration:none;">REGISTER</a></h1>
+<button class="w3-button w3-black w3-round-xxlarge button"><a href="{% url 'register' e_id=e.pk %}" style="text-decoration:none; color:white;">Register</a></button>
 
     {% endfor %}
 
 {% else %}
     <p>NO EVENTS ARE AVAILABLE</p>
 {% endif %}
+</body>
+</html>
+{% endblock %}

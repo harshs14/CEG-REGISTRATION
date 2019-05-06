@@ -1,11 +1,28 @@
-<form method="post">
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+{% block contact %}
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<form method="post" style="margin-left:1vw; font-size:1.5vw;">
 
     {% csrf_token %}
 
-    <label>{{ form.as_p }}
+    <label>
+
+        {{ form.as_p }}
 
     </label>
     <br>
-    <button>CONTACT</button>
+    <!--<button>CONTACT</button>-->
+    <button class="w3-button w3-black w3-round-xxlarge" style="text-decoration:none; color:white;">Contact Us</button>
+
 
 </form>
+</body>
+</html>
+{% endblock %}

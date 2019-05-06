@@ -1,9 +1,15 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+{% block register %}
+<!DOCTYPE html>
 <html>
 <head>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
 <body>
-<form method="post">
+<form method="post" style="margin-left:1vw; font-size:1.5vw;">
 
     {% csrf_token %}
     {{ form.as_p }}
@@ -11,8 +17,9 @@
 
     <div class="g-recaptcha" data-sitekey="6LcZyJoUAAAAAK_AGiNm_CxiA8RnmYjmDJa-muzd"></div>
     <br>
-    <button>REGISTER</button>
+    <button class="w3-button w3-black w3-round-xxlarge" style="text-decoration:none; color:white;">Register</button>
 
 </form>
 </body>
 </html>
+{% endblock %}

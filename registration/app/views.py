@@ -76,18 +76,19 @@ class EventRegister(View):
             ''' End reCAPTCHA validation '''
 
             if result['success']:
-                form.save()
+                form.save(commit=False)
                 messages.success(request, 'successful registration!')
             else:
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
 
             event_register = form.save(commit=False)
             event_register.event_id = event_obj
+            print(event_obj,"1")
             event_register.event_name = event_obj.name
             event_obj.seats = event_obj.seats - 1
             event_obj.save()
             event_register.save()
-            print(event_register.email, "2")
+            # print(event_register.email, "2")
             x = event_obj.name
             r_id = event_register
             message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ".\nREGISTRATION ID->" + str(r_id)
