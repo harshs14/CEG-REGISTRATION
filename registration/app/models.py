@@ -16,9 +16,9 @@ class Event(models.Model):
 
 
 class Register(models.Model):
-    name = models.CharField(max_length=50, null=False, blank=True)
-    phone_number = PhoneNumberField(blank=True)
-    email = models.EmailField(null=False, blank=True)
+    name = models.CharField(max_length=50, null=False, blank=False)
+    phone_number = PhoneNumberField(null=False, blank=False)
+    email = models.EmailField(null=False, blank=False)
     address = models.CharField(null=False, blank=False, max_length=200)
     event_id = models.ForeignKey(Event, on_delete=models.CASCADE)
     event_name = models.CharField(max_length=100, null=False, blank=True)

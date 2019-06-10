@@ -134,8 +134,8 @@ USE_TZ = True
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'onlineauction.si18@gmail.com'
-EMAIL_HOST_PASSWORD = 'onlineauctionhpi'
+EMAIL_HOST_USER = os.environ.get('email_id')
+EMAIL_HOST_PASSWORD = os.environ.get('email_password')
 EMAIL_PORT = 587
 
 #
