@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('secret_key_ceg')
 # DEBUG = True
 # DEBUG = os.environ.get('DEBUG', default=False, cast=bool)
 # DEBUG = os.environ.get('DEBUG')
-DEBUG = os.environ.get('DEBUG', default=True)
+DEBUG = os.environ.get('DEBUG', default=False)
 
 
 ALLOWED_HOSTS = ['*']
@@ -112,8 +112,6 @@ DATABASES = {
         default=os.environ.get('DATABASE_URL')
         )
     }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
