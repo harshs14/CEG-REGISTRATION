@@ -138,4 +138,3 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 
-GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('recaptcha')
