@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('secret_key_ceg')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'https://ceg-site.herokuapp.com']
 
 # Application definition
 
@@ -138,3 +138,4 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 
+DEBUG = os.environ.get('DEBUG', default=True, cast=bool)
