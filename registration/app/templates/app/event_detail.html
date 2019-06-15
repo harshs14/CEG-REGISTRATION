@@ -1,0 +1,69 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+{% block detail %}
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+h2{
+color:white;
+}
+.w3-btn {width:150px;}
+
+th,td{
+   color:black;
+   font-size:2vw;
+}
+
+</style>
+</head>
+<body>
+
+{% if event %}
+    {% for e in event %}
+<table style="width:100%" class="w3-table w3-striped">
+  <tr>
+    <th>Name:</th>
+    <td>{{ name }}</td>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td>{{ description }}</td>
+  </tr>
+  <tr>
+    <th>Venue:</th>
+    <td>{{ venue }}</td>
+  </tr>
+  <tr>
+    <th>Time:</th>
+    <td>{{ time }}</td>
+  </tr>
+
+  <tr>
+    <th>Seats:</th>
+    <td>{{ seats }}</td>
+  </tr>
+</table>
+   {% if avatar %}
+   <img src="{{ avatar.url }}">
+   {% endif %}
+<br><br>
+
+   {% if video %}
+   <video width="320" height="240" controls>
+    <source src="{{ video.url }}" type="video/mp4">
+   </video>
+   {% endif %}
+
+<button class="w3-button w3-black w3-round-xxlarge button"><a href="{% url 'register' e_id=e.pk %}" style="text-decoration:none; color:white;">Register</a></button>
+
+    {% endfor %}
+
+{% else %}
+    <p>NO EVENTS ARE AVAILABLE</p>
+{% endif %}
+</body>
+</html>
+{% endblock %}
