@@ -1,3 +1,3 @@
 from .base import *
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', default=True)
