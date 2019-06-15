@@ -1,8 +1,8 @@
 certifi==2018.8.24
 chardet==3.0.4
 diff-match-patch==20110725.1
-dj-database-url==0.5.0
-Django==2.2.2
+dj-database-url==0.4.2
+Django==2.1.5
 django-admin-honeypot==1.1.0
 django-ckeditor==5.3.0
 django-import-export==1.0.0
