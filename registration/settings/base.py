@@ -138,4 +138,4 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 
-DEBUG = os.environ.get('DEBUG', default=True, cast=bool)
+DEBUG = os.environ.get('DEBUG', default=True)
