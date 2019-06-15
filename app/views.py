@@ -4,7 +4,7 @@ from .models import *
 from .forms import *
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from registration.settings import EMAIL_HOST_USER
+from registration.settings.base import EMAIL_HOST_USER
 import json
 import urllib
 from django.shortcuts import render, redirect
