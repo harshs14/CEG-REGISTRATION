@@ -61,29 +61,29 @@ class EventRegister(View):
 
         form = RegisterForm(request.POST)
         if form.is_valid():
-
-            ''' Begin reCAPTCHA validation '''
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
-                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response
-            }
-            data = urllib.parse.urlencode(values).encode()
-            req = urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode())
-            ''' End reCAPTCHA validation '''
-
-            if result['success']:
-                form.save(commit=False)
-                messages.success(request, 'successful registration!')
-            else:
-                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+            #
+            # ''' Begin reCAPTCHA validation '''
+            # recaptcha_response = request.POST.get('g-recaptcha-response')
+            # url = 'https://www.google.com/recaptcha/api/siteverify'
+            # values = {
+            #     'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+            #     'response': recaptcha_response
+            # }
+            # data = urllib.parse.urlencode(values).encode()
+            # req = urllib.request.Request(url, data=data)
+            # response = urllib.request.urlopen(req)
+            # result = json.loads(response.read().decode())
+            # ''' End reCAPTCHA validation '''
+            #
+            # if result['success']:
+            #     form.save(commit=False)
+            #     messages.success(request, 'successful registration!')
+            # else:
+            #     messages.error(request, 'Invalid reCAPTCHA. Please try again.')
 
             event_register = form.save(commit=False)
             event_register.event_id = event_obj
-            print(event_obj,"1")
+            print(event_obj, "1")
             event_register.event_name = event_obj.name
             event_obj.seats = event_obj.seats - 1
             event_obj.save()
