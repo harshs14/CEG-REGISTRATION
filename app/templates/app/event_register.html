@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block register %}
 <!DOCTYPE html>
-<html>
+<html xmlns:margin-left="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
@@ -11,10 +11,71 @@
 <form method="post" style="margin-left:1vw; font-size:1.5vw;">
 
     {% csrf_token %}
-    {{ form.as_p }}
-<br>
-    <button class="w3-button w3-black w3-round-xxlarge" style="text-decoration:none; color:white;">Register</button>
+                <h4>PERSONAL DETAILS</h4>
 
+     <span style="font-size:1.2vw;margin-left:10vw;">First Name </span><span style="color:red;">*</span>
+     <span style="font-size:1vw; margin-left:1vw;"> {{ form.first_name }}</span>
+
+
+     <span style="font-size:1.2vw; margin-left:10vw;">Middle Name </span>
+     <span style="font-size:1vw; margin-left:1vw;"> {{ form.middle_name }}</span>
+
+        <br><br>
+
+     <span style="font-size:1.2vw; margin-left:10vw;">Last Name</span><span style="color:red;">*</span>
+     <span style="font-size:1vw; margin-left:1vw;">{{ form.last_name }}</span>
+
+
+     <span style="font-size:1.2vw;margin-left:10vw;">Gender</span><span style="color:red;">*</span>
+     <span style="font-size:1vw; margin-left:4vw; "> {{ form.gender }}</span>
+
+        <br><br>
+
+     <span style="font-size:1.2vw; margin-left:10vw;">Address</span><span style="color:red;">*</span>
+     <span style="font-size:1vw; margin-left:2.5vw;">{{ form.address }}</span>
+
+
+     <span style="font-size:1.2vw; margin-left:10vw;">City</span><span style="color:red;">*</span>
+     <span style="font-size:1vw; margin-left:6vw;">{{ form.city }}</span>
+
+        <br><br>
+
+     <span style="font-size:1.2vw; margin-left:10vw;">State</span><span style="color:red;">*</span>
+     <span style="font-size:1vw; margin-left:4vw;">{{ form.state }}</span>
+
+
+     <span style="font-size:1.2vw; margin-left:8.9vw;">Pincode</span><span style="color:red;">*</span>
+     <span style="font-size:1vw; margin-left:3.6vw;">{{ form.pincode }}</span>
+
+        <br><br>
+
+     <span style="font-size:1.2vw; margin-left:10vw;">Email</span><span style="color:red;">*</span>
+     <span style="font-size:1vw; margin-left:3.9vw;">{{ form.email }}</span>
+
+        <br><br>
+
+        <h4>ORGANISATION DETAILS</h4>
+
+        <span style="font-size:1.2vw; margin-left:10vw;">Category</span><span style="color:red;">*</span>
+        <span style="font-size:1vw; margin-left:2.2vw;">{{ form.category }}</span>
+
+
+        <span style="font-size:1.2vw; margin-left:19vw;">Organisation</span><span style="color:red;">*</span>
+        <span style="font-size:1vw; margin-left:1vw;">{{ form.organisation }}</span>
+
+        <br><br>
+
+        <span style="font-size:1.2vw; margin-left:10vw;">Designation</span><span style="color:red;">*</span>
+        <span style="font-size:1vw; margin-left:0.7vw;">{{ form.designation }}</span>
+
+
+        <span style="font-size:1.2vw; margin-left:10vw;">Captcha</span><span style="color:red;">*</span>
+        <span style="font-size:1.2vw;">{{a}}+{{b}}=</span>
+        <span style="font-size:1vw; margin-left:0.2vw;">{{ form.captcha }}</span>
+
+        <br><br>
+
+    <button class="w3-button w3-black w3-round-xxlarge" style="text-decoration:none; font-size:1.2vw; color:white; margin-left:10vw;" >Register</button>
 </form>
 </body>
 </html>

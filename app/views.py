@@ -10,7 +10,7 @@ import urllib
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import HttpResponse
-
+import random
 
 class Events(View):
     template_name = 'app/event.html'
@@ -28,6 +28,7 @@ class EventDetail(View):
     def get(self, request, e_id, *args, **kwargs):
 
         event_obj = Event.objects.get(pk=e_id)
+
         context = {
             'event': Event.objects.filter(pk=e_id),
             'name': event_obj.name,
@@ -39,20 +40,27 @@ class EventDetail(View):
             'seats': event_obj.seats,
             'id': event_obj.id,
         }
+
         return render(request, self.template_name, context)
 
 
 class EventRegister(View):
     template_name = 'app/event_register.html'
 
+    a = random.randint(1, 5)
+    b = random.randint(6, 9)
+    c = a+b
+
     def get(self, request, e_id, *args, **kwargs):
         form = RegisterForm()
         event_obj = Event.objects.filter(pk=e_id)
         event = Event.objects.get(pk=e_id)
+
         if event.seats == 0:
             return render(request, 'app/seats_full.html')
         else:
-            context = {'form': form, 'event': event_obj}
+            context = {'form': form, 'event': event_obj, 'a': self.a, 'b': self.b}
+
             return render(request, self.template_name, context)
 
     def post(self, request, e_id, *args, **kwargs):
@@ -61,43 +69,34 @@ class EventRegister(View):
 
         form = RegisterForm(request.POST)
         if form.is_valid():
-            #
-            # ''' Begin reCAPTCHA validation '''
-            # recaptcha_response = request.POST.get('g-recaptcha-response')
-            # url = 'https://www.google.com/recaptcha/api/siteverify'
-            # values = {
-            #     'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-            #     'response': recaptcha_response
-            # }
-            # data = urllib.parse.urlencode(values).encode()
-            # req = urllib.request.Request(url, data=data)
-            # response = urllib.request.urlopen(req)
-            # result = json.loads(response.read().decode())
-            # ''' End reCAPTCHA validation '''
-            #
-            # if result['success']:
-            #     form.save(commit=False)
-            #     messages.success(request, 'successful registration!')
-            # else:
-            #     messages.error(request, 'Invalid reCAPTCHA. Please try again.')
 
             event_register = form.save(commit=False)
-            event_register.event_id = event_obj
-            print(event_obj, "1")
-            event_register.event_name = event_obj.name
-            event_obj.seats = event_obj.seats - 1
-            event_obj.save()
-            event_register.save()
-            # print(event_register.email, "2")
-            x = event_obj.name
-            r_id = event_register
-            message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(x) + ".\nREGISTRATION ID->" + str(r_id)
-            subject = "CEG EVENT REGISTRATION"
-            from_mail = EMAIL_HOST_USER
-            to_mail = [event_register.email]
-            send_mail(subject, message, from_mail, to_mail, fail_silently=False)
-            messages.success(request, "SUCCESSFULLY REGISTERED")
-        return redirect('event_list')
+
+            event_register.captcha = self.a + self.b
+
+            if event_register.captcha == self.c:
+
+                event_register.event_id = event_obj
+                event_register.event_name = event_obj.name
+                event_obj.seats = event_obj.seats - 1
+                event_obj.save()
+                event_register.save()
+
+                e_name = event_obj.name
+                r_id = event_register
+
+                message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(
+                    e_name) + ".\nREGISTRATION ID->" + str(r_id)
+                subject = "CEG EVENT REGISTRATION"
+                from_mail = EMAIL_HOST_USER
+                to_mail = [event_register.email]
+                send_mail(subject, message, from_mail, to_mail, fail_silently=False)
+                messages.success(request, "SUCCESSFULLY REGISTERED")
+
+                return redirect('event_list')
+
+            else:
+                return render(request, self.template_name)
 
 
 class Contact(View):

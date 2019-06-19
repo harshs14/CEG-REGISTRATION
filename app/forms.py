@@ -4,9 +4,12 @@ from .models import *
 
 class RegisterForm(forms.ModelForm):
 
+    captcha = forms.IntegerField(required=True)
+
     class Meta:
         model = Register
-        fields = ('name', 'email', 'address',)
+        fields = ('first_name', 'middle_name', 'last_name', 'gender', 'email', 'address', 'city', 'state', 'pincode', 'category',
+                  'organisation', 'designation', 'captcha')
 
 
 class ContactForm(forms.ModelForm):
