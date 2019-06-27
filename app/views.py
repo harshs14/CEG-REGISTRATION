@@ -72,9 +72,13 @@ class EventRegister(View):
 
             event_register = form.save(commit=False)
 
-            event_register.captcha = self.a + self.b
-
-            if event_register.captcha == self.c:
+            # event_register.captcha = self.a + self.b
+            # print(event_register.captcha, "1")
+            print(self.a, "a")
+            print(self.b,  "b")
+            print(self.c, "c")
+            print(request.POST['captcha'])
+            if int(request.POST['captcha']) == self.c:
 
                 event_register.event_id = event_obj
                 event_register.event_name = event_obj.name
@@ -96,7 +100,10 @@ class EventRegister(View):
                 return redirect('event_list')
 
             else:
-                return render(request, self.template_name)
+                # form = RegisterForm()
+                context = {'form': form, 'event': event_obj, 'a': self.a, 'b': self.b}
+                messages.error(request, "TRY AGAIN")
+                return render(request, self.template_name, context)
 
 
 class Contact(View):

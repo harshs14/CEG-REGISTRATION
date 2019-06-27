@@ -8,8 +8,8 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = Register
-        fields = ('first_name', 'middle_name', 'last_name', 'gender', 'email', 'address', 'city', 'state', 'pincode', 'category',
-                  'organisation', 'designation', 'captcha')
+        fields = ('captcha', 'first_name', 'middle_name', 'last_name', 'gender', 'email', 'address', 'city', 'state',
+                  'pincode', 'category', 'organisation', 'designation')
 
 
 class ContactForm(forms.ModelForm):

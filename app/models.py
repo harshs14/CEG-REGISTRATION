@@ -70,7 +70,7 @@ class Register(models.Model):
     first_name = models.CharField(max_length=50, null=False, blank=False)
     middle_name = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=50, null=False, blank=False)
-    gender = models.CharField(max_length=50, blank=True,null=True, choices=GENDER_CHOICE)
+    gender = models.CharField(max_length=50, blank=False, null=False, choices=GENDER_CHOICE)
     email = models.EmailField(null=False, blank=False)
     address = models.CharField(null=False, blank=False, max_length=200)
     city = models.CharField(null=False, blank=False, max_length=50)

@@ -14,7 +14,8 @@
                 <h4>PERSONAL DETAILS</h4>
 
      <span style="font-size:1.2vw;margin-left:10vw;">First Name </span><span style="color:red;">*</span>
-     <span style="font-size:1vw; margin-left:1vw;"> {{ form.first_name }}</span>
+     <span style="font-size:1vw; margin-left:0.6vw;"> {{ form.first_name }}</span>
+     <span id="first_name_err" class='validationerror' style="font-size:1vw; margin-right:-8.48vw; color:red;"></span>
 
 
      <span style="font-size:1.2vw; margin-left:10vw;">Middle Name </span>
@@ -24,6 +25,7 @@
 
      <span style="font-size:1.2vw; margin-left:10vw;">Last Name</span><span style="color:red;">*</span>
      <span style="font-size:1vw; margin-left:1vw;">{{ form.last_name }}</span>
+     <span id="last_name_err" class='validationerror' style="font-size:1vw; margin-right:-8.48vw; color:red;"></span>
 
 
      <span style="font-size:1.2vw;margin-left:10vw;">Gender</span><span style="color:red;">*</span>
@@ -33,10 +35,12 @@
 
      <span style="font-size:1.2vw; margin-left:10vw;">Address</span><span style="color:red;">*</span>
      <span style="font-size:1vw; margin-left:2.5vw;">{{ form.address }}</span>
+     <span id="address_err" class='validationerror' style="font-size:1vw; margin-right:-7.8vw; color:red;"></span>
 
 
      <span style="font-size:1.2vw; margin-left:10vw;">City</span><span style="color:red;">*</span>
      <span style="font-size:1vw; margin-left:6vw;">{{ form.city }}</span>
+     <span id="city_err" class='validationerror' style="font-size:1vw; color:red;"></span>
 
         <br><br>
 
@@ -46,11 +50,13 @@
 
      <span style="font-size:1.2vw; margin-left:8.9vw;">Pincode</span><span style="color:red;">*</span>
      <span style="font-size:1vw; margin-left:3.6vw;">{{ form.pincode }}</span>
+     <span id="pincode_err" class='validationerror' style="font-size:1vw; color:red;"></span>
 
         <br><br>
 
      <span style="font-size:1.2vw; margin-left:10vw;">Email</span><span style="color:red;">*</span>
      <span style="font-size:1vw; margin-left:3.9vw;">{{ form.email }}</span>
+     <span id="email_err" class='validationerror' style="font-size:1vw; color:red;"></span>
 
         <br><br>
 
@@ -62,21 +68,211 @@
 
         <span style="font-size:1.2vw; margin-left:19vw;">Organisation</span><span style="color:red;">*</span>
         <span style="font-size:1vw; margin-left:1vw;">{{ form.organisation }}</span>
+        <span id="org_err" class='validationerror' style="font-size:1vw; color:red;"></span>
 
         <br><br>
 
         <span style="font-size:1.2vw; margin-left:10vw;">Designation</span><span style="color:red;">*</span>
         <span style="font-size:1vw; margin-left:0.7vw;">{{ form.designation }}</span>
+        <span id="des_err" class='validationerror' style="font-size:1vw; margin-right:-8.8vw; color:red;"></span>
 
 
         <span style="font-size:1.2vw; margin-left:10vw;">Captcha</span><span style="color:red;">*</span>
-        <span style="font-size:1.2vw;">{{a}}+{{b}}=</span>
+        <span id="sum" style="font-size:1.2vw;">{{a}}+{{b}}=</span>
         <span style="font-size:1vw; margin-left:0.2vw;">{{ form.captcha }}</span>
+        <span id="captcha_err" class='validationerror' style="font-size:1vw; color:red;"></span>
 
         <br><br>
 
-    <button class="w3-button w3-black w3-round-xxlarge" style="text-decoration:none; font-size:1.2vw; color:white; margin-left:10vw;" >Register</button>
+    <button id="id_submit" class="w3-button w3-black w3-round-xxlarge" style="text-decoration:none; font-size:1.2vw; color:white; margin-left:10vw;" >Register</button>
 </form>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+var submit = false;
+$(document).ready(function () {
+        $(".validationerror").hide();
+
+
+        $("#id_first_name").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                if (!regex.test($(this).val())) {
+                    document.getElementById('first_name_err').innerHTML = "Invalid First Name";
+                    $("#first_name_err" ).show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_first_name").focusin(function (event) {
+            if (event.charCode!=0) {
+                $( "#first_name_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_last_name").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                if (!regex.test($(this).val())) {
+                    document.getElementById('last_name_err').innerHTML = "Invalid Last Name";
+                    $("#last_name_err" ).show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_last_name").focusin(function (event) {
+            if (event.charCode!=0) {
+                $("#last_name_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_address").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[a-zA-Z0-9.- ]+$");
+                if (!regex.test($(this).val())) {
+                    document.getElementById('address_err').innerHTML = "Invalid Adddress";
+                    $("#address_err" ).show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_address").focusin(function (event) {
+            if (event.charCode!=0) {
+                $("#address_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_email").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$");
+                if (!regex.test($("#id_email").val())) {
+                    document.getElementById('email_err').innerHTML = "Invalid Email Id";
+                    $( "#email_err" ).show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#Email").focusin(function (event) {
+            if (event.charCode!=0) {
+                $( "#email_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_city").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                if (!regex.test($(this).val())) {
+                    document.getElementById('city_err').innerHTML = "Invalid City";
+                    $("#city_err" ).show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_city").focusin(function (event) {
+            if (event.charCode!=0) {
+                $("#city_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_pincode").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[0-9]{6}$");
+                if (!regex.test($("#id_pincode").val())) {
+                    document.getElementById('pincode_err').innerHTML = "Invalid Pincode";
+                    $("#pincode_err").show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_pincode").focusin(function (event) {
+            if (event.charCode!=0) {
+                $("#pincode_err").hide();
+                submit = true;
+            }
+        });
+
+        $("#id_organisation").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                if (!regex.test($(this).val())) {
+                    document.getElementById('org_err').innerHTML = "Invalid Organisation";
+                    $("#org_err" ).show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_organisation").focusin(function (event) {
+            if (event.charCode!=0) {
+                $("#org_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_designation").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                if (!regex.test($(this).val())) {
+                    document.getElementById('des_err').innerHTML = "Invalid Designation";
+                    $("#des_err" ).show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_designation").focusin(function (event) {
+            if (event.charCode!=0) {
+                $("#des_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_captcha").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[0-9]$");
+                if (!regex.test($("#id_captcha").val())) {
+                    document.getElementById('captcha_err').innerHTML = "Invalid Captcha";
+                    $( "#captcha_err").show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_captcha").focusin(function (event) {
+            if (event.charCode!=0) {
+                $( "#captcha_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_submit").click(function (e) {
+             if(submit==false){
+                e.preventDefault();
+                console.log("working")
+                $("#id_submit").css('cursor', 'not-allowed');
+             }
+             else{
+                $("#id_submit").css('cursor', 'pointer');
+             }
+             });
+
+
+
+    });
+
+</script>
+
 </body>
 </html>
 {% endblock %}
