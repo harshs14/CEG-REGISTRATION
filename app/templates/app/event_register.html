@@ -20,6 +20,8 @@
 
      <span style="font-size:1.2vw; margin-left:10vw;">Middle Name </span>
      <span style="font-size:1vw; margin-left:1vw;"> {{ form.middle_name }}</span>
+     <span id="middle_name_err" class='validationerror' style="font-size:1vw; color:red;"></span>
+
 
         <br><br>
 
@@ -111,6 +113,24 @@ $(document).ready(function () {
         $("#id_first_name").focusin(function (event) {
             if (event.charCode!=0) {
                 $( "#first_name_err" ).hide();
+                submit = true;
+            }
+        });
+
+        $("#id_middle_name").focusout(function (event) {
+            if (event.charCode!=0) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                if (!regex.test($(this).val())) {
+                    document.getElementById('middle_name_err').innerHTML = "Invalid Middle Name";
+                    $("#middle_name_err" ).show();
+                    submit = false;
+                }
+            }
+        });
+
+        $("#id_miiddle_name").focusin(function (event) {
+            if (event.charCode!=0) {
+                $( "#middle_name_err" ).hide();
                 submit = true;
             }
         });

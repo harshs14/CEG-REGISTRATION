@@ -94,7 +94,7 @@ class EventRegister(View):
                 subject = "CEG EVENT REGISTRATION"
                 from_mail = EMAIL_HOST_USER
                 to_mail = [event_register.email]
-                send_mail(subject, message, from_mail, to_mail, fail_silently=False)
+                send_mail(subject, message, from_mail, to_mail, fail_silently=True)
                 messages.success(request, "SUCCESSFULLY REGISTERED")
 
                 return redirect('event_list')
