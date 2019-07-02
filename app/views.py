@@ -102,7 +102,7 @@ class EventRegister(View):
             else:
                 # form = RegisterForm()
                 context = {'form': form, 'event': event_obj, 'a': self.a, 'b': self.b}
-                messages.error(request, "TRY AGAIN")
+                messages.error(request, "TRY AGAIN!!!")
                 return render(request, self.template_name, context)
 
 
