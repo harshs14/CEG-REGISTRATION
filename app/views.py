@@ -69,41 +69,32 @@ class EventRegister(View):
 
         form = RegisterForm(request.POST)
         if form.is_valid():
-
             event_register = form.save(commit=False)
 
-            # event_register.captcha = self.a + self.b
-            # print(event_register.captcha, "1")
-            print(self.a, "a")
-            print(self.b,  "b")
-            print(self.c, "c")
-            print(request.POST['captcha'])
             if int(request.POST['captcha']) == self.c:
-
                 event_register.event_id = event_obj
                 event_register.event_name = event_obj.name
                 event_obj.seats = event_obj.seats - 1
                 event_obj.save()
                 event_register.save()
-
                 e_name = event_obj.name
                 r_id = event_register
-
                 message = "YOU ARE SUCCESSFULLY REGISTERED FOR THE EVENT->" + str(
                     e_name) + ".\nREGISTRATION ID->" + str(r_id)
                 subject = "CEG EVENT REGISTRATION"
                 from_mail = EMAIL_HOST_USER
                 to_mail = [event_register.email]
                 send_mail(subject, message, from_mail, to_mail, fail_silently=True)
-                messages.success(request, "SUCCESSFULLY REGISTERED")
-
                 return redirect('event_list')
 
             else:
-                # form = RegisterForm()
                 context = {'form': form, 'event': event_obj, 'a': self.a, 'b': self.b}
                 messages.error(request, "TRY AGAIN!!!")
                 return render(request, self.template_name, context)
+        else:
+            context = {'form': form, 'event': event_obj, 'a': self.a, 'b': self.b}
+            messages.error(request, "TRY AGAIN!!!")
+            return render(request, self.template_name, context)
 
 
 class Contact(View):

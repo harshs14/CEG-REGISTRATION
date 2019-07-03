@@ -98,10 +98,9 @@ var submit = false;
 $(document).ready(function () {
         $(".validationerror").hide();
 
-
         $("#id_first_name").focusout(function (event) {
             if (event.charCode!=0) {
-                var regex = new RegExp("^[a-zA-Z ]+$");
+                var regex = new RegExp("^[a-zA-Z ]{2,30}$");
                 if (!regex.test($(this).val())) {
                     document.getElementById('first_name_err').innerHTML = "Invalid First Name";
                     $("#first_name_err" ).show();
@@ -113,13 +112,14 @@ $(document).ready(function () {
         $("#id_first_name").focusin(function (event) {
             if (event.charCode!=0) {
                 $( "#first_name_err" ).hide();
+                document.getElementById('first_name_err').innerHTML = "";
                 submit = true;
             }
         });
 
         $("#id_middle_name").focusout(function (event) {
-            if (event.charCode!=0) {
-                var regex = new RegExp("^[a-zA-Z ]+$");
+            if (event.charCode!=0 || event.charCode==0) {
+                var regex = new RegExp("^[a-zA-Z ]{2,30}$");
                 if (!regex.test($(this).val())) {
                     document.getElementById('middle_name_err').innerHTML = "Invalid Middle Name";
                     $("#middle_name_err" ).show();
@@ -128,16 +128,17 @@ $(document).ready(function () {
             }
         });
 
-        $("#id_miiddle_name").focusin(function (event) {
-            if (event.charCode!=0) {
+        $("#id_middle_name").focusin(function (event) {
+            if (event.charCode!=0 || event.charCode==0) {
                 $( "#middle_name_err" ).hide();
+                document.getElementById('middle_name_err').innerHTML = "";
                 submit = true;
             }
         });
 
         $("#id_last_name").focusout(function (event) {
             if (event.charCode!=0) {
-                var regex = new RegExp("^[a-zA-Z ]+$");
+                var regex = new RegExp("^[a-zA-Z ]{2,30}$");
                 if (!regex.test($(this).val())) {
                     document.getElementById('last_name_err').innerHTML = "Invalid Last Name";
                     $("#last_name_err" ).show();
@@ -149,13 +150,14 @@ $(document).ready(function () {
         $("#id_last_name").focusin(function (event) {
             if (event.charCode!=0) {
                 $("#last_name_err" ).hide();
+                document.getElementById('last_name_err').innerHTML = "";
                 submit = true;
             }
         });
 
         $("#id_address").focusout(function (event) {
             if (event.charCode!=0) {
-                var regex = new RegExp("^[a-zA-Z0-9.- ]+$");
+                var regex = new RegExp("^[a-zA-Z0-9.- ]{2,50}$");
                 if (!regex.test($(this).val())) {
                     document.getElementById('address_err').innerHTML = "Invalid Adddress";
                     $("#address_err" ).show();
@@ -166,7 +168,8 @@ $(document).ready(function () {
 
         $("#id_address").focusin(function (event) {
             if (event.charCode!=0) {
-                $("#address_err" ).hide();
+                $("#address_err" ).hide()
+                document.getElementById('address_err').innerHTML = "";
                 submit = true;
             }
         });
@@ -182,9 +185,10 @@ $(document).ready(function () {
             }
         });
 
-        $("#Email").focusin(function (event) {
+        $("#id_email").focusin(function (event) {
             if (event.charCode!=0) {
                 $( "#email_err" ).hide();
+                document.getElementById('email_err').innerHTML = "";
                 submit = true;
             }
         });
@@ -203,6 +207,7 @@ $(document).ready(function () {
         $("#id_city").focusin(function (event) {
             if (event.charCode!=0) {
                 $("#city_err" ).hide();
+                document.getElementById('city_err').innerHTML = "";
                 submit = true;
             }
         });
@@ -221,6 +226,7 @@ $(document).ready(function () {
         $("#id_pincode").focusin(function (event) {
             if (event.charCode!=0) {
                 $("#pincode_err").hide();
+                document.getElementById('pincode_err').innerHTML = "";
                 submit = true;
             }
         });
@@ -239,6 +245,7 @@ $(document).ready(function () {
         $("#id_organisation").focusin(function (event) {
             if (event.charCode!=0) {
                 $("#org_err" ).hide();
+                document.getElementById('org_err').innerHTML = "";
                 submit = true;
             }
         });
@@ -257,6 +264,7 @@ $(document).ready(function () {
         $("#id_designation").focusin(function (event) {
             if (event.charCode!=0) {
                 $("#des_err" ).hide();
+                document.getElementById('des_err').innerHTML = "";
                 submit = true;
             }
         });
@@ -275,6 +283,7 @@ $(document).ready(function () {
         $("#id_captcha").focusin(function (event) {
             if (event.charCode!=0) {
                 $( "#captcha_err" ).hide();
+                document.getElementById('captcha_err').innerHTML = "";
                 submit = true;
             }
         });
@@ -290,7 +299,26 @@ $(document).ready(function () {
              }
              });
 
-
+        $("#id_submit").hover(function (e) {
+             if(submit==false ||
+                (document.getElementById('first_name_err').innerHTML == "") ||
+                (document.getElementById('middle_name_err').innerHTML == "") ||
+                (document.getElementById('last_name_err').innerHTML == "") ||
+                (document.getElementById('address_err').innerHTML == "") ||
+                (document.getElementById('city_err').innerHTML == "") ||
+                (document.getElementById('pincode_err').innerHTML == "") ||
+                (document.getElementById('org_err').innerHTML == "") ||
+                (document.getElementById('des_err').innerHTML == "") ||
+                (document.getElementById('captcha_err').innerHTML == "")
+){
+                e.preventDefault();
+                console.log("working")
+                $("#id_submit").css('cursor', 'not-allowed');
+             }
+             else{
+                $("#id_submit").css('cursor', 'pointer');
+             }
+             });
 
     });
 
