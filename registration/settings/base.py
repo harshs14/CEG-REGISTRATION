@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'storages',
 ]
 
@@ -139,4 +140,3 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 DEBUG = os.environ.get('DEBUG', default=False)
-
