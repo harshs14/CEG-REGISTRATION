@@ -128,15 +128,7 @@ EMAIL_HOST_USER = os.environ.get('email_id')
 EMAIL_HOST_PASSWORD = os.environ.get('email_password')
 EMAIL_PORT = 587
 
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, "static"),
-     '/var/www/static/',
-]
 MEDIA_URL = '/media/'
 
 DEBUG = os.environ.get('DEBUG', default=False)

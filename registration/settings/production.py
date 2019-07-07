@@ -6,7 +6,7 @@ DATABASES = {
         default=os.environ.get('DATABASE_URL')
         )
     }
-
+AWS_DEFAULT_ACL = None
 AWS_ACCESS_KEY_ID = os.environ.get('ceg_site_key')
 AWS_SECRET_ACCESS_KEY = os.environ.get('ceg_site_id')
 AWS_STORAGE_BUCKET_NAME = 'ceg-site'
